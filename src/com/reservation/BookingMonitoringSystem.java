@@ -3,15 +3,15 @@ import java.util.Arrays;
 
 public class BookingMonitoringSystem
 {
+    // Size of hotel max 1000
     final int rooms = 3;
+    //Total number of days
     final int days = 10;
     
     public void AvailableRooms(int startDay, int endDay)
     {
-        // first see if room 0 is availble on start day;
         boolean isRoomAvailble;
         boolean isRoomVacant = false;
-
         System.out.println(Arrays.deepToString(Database.roomsDays));
 
         for (int room = 0; room < rooms; room++)
@@ -46,9 +46,7 @@ public class BookingMonitoringSystem
         }
         if (!isRoomVacant)
             System.out.println("No room is available");
-        //Database.db [0] [0]= 1;
-        //reference to database
-        //roomsDays [0][0] = 2;
+
         System.out.println(Arrays.deepToString(Database.roomsDays));
     }
 }

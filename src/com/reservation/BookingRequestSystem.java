@@ -23,10 +23,9 @@ public class BookingRequestSystem
         this.startDay = scanner.nextInt();
         System.out.print("Please enter the End day: ");
         this.endDay = scanner.nextInt();
+
+        //Check availbility of room
         bookingMonitoringSystem.AvailableRooms(startDay,endDay);
-
-
-        // Check booking system availabilty
     }
 
 }

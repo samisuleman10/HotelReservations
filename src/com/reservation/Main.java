@@ -5,21 +5,14 @@ import java.util.Scanner;
 
 public class Main
 {
-
     public static void main(String[] args)
     {
+        BookingRequestSystem bookingSystem = new BookingRequestSystem();
+
         while (true)
         {
-            BookingRequestSystem bookingSystem = new BookingRequestSystem();
             bookingSystem.BookingRequest();
         }
 
-        //System.out.println(Arrays.deepToString(db.roomsDays));
-
     }
-
-
-
-
-
 }
