@@ -15,7 +15,6 @@ public class BookingRequestSystem
 
     public void BookingRequest()
     {
-
         Scanner scanner = new Scanner(System.in);
         // Get input from customer
         System.out.println("Please enter the booking date: (Start day, End day)");
@@ -24,8 +23,13 @@ public class BookingRequestSystem
         System.out.print("Please enter the End day: ");
         this.endDay = scanner.nextInt();
 
-        //Check availbility of room
-        bookingMonitoringSystem.AvailableRooms(startDay,endDay);
+        if ((startDay > 0 && startDay < Database.days) && (endDay > 0 && endDay < Database.days) && startDay <= endDay)
+        {
+            bookingMonitoringSystem.AvailableRooms(startDay,endDay);
+        }
+        else
+            System.out.println("Declined");
+
     }
 
 }

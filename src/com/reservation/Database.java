@@ -2,16 +2,11 @@ package com.reservation;
 
 public  class Database
 {
-    static int [][] roomsDays = new int[3][10];
 
-    Database()
-    {
-        //roomsDays = 0;
-    }
+    // Size of hotel max 1000
+    final static int rooms = 3;
+    //Total number of days
+    final static int days = 10;
 
-
-    public static void SaveBookings()
-    {
-
-    }
+    static int [][] roomsDays = new int [rooms] [days];
 }
