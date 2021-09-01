@@ -1,53 +1,66 @@
 package com.reservation;
-import java.util.Arrays;
 
+//Checks for the valid room requests
 public class BookingMonitoringSystem
 {
-    // Finds available rooms and decline if no room is availalbe in the hotel
-    public void AvailableRooms(int startDay, int endDay)
+    // Accepts or decline the availability of rooms in the hotel
+    public String AvailableRooms(int startDay, int endDay, Database database)
     {
         boolean isRoomAvailable;
-        boolean isRoomVacant;
-        int rooms = Database.rooms;
-        int days = Database.days;
-        isRoomVacant = false;
+        //boolean isRoomVacant;
+        int rooms = database.hotelReservations.length;
+        int days = database.hotelReservations[0].length;
 
-        System.out.println("Previous rooms status");
-        System.out.println(Arrays.deepToString(Database.roomsDays));
+        //isRoomVacant = false;
 
-        for (int room = 0; room < rooms; room++)
+        //Checks for the limits of days
+        if ((startDay >= 0 && startDay < days) && (endDay >= 0 && endDay < days) && startDay <= endDay)
         {
-            isRoomAvailable = true ;
-            if (Database.roomsDays [room][startDay] == 0)
-            {   // now see if all days are available
-                for (int s = startDay; s <= endDay; s++)
+            // Iterates through the 2D array and finds the room available for complete duration.
+            for (int room = 0; room < rooms; room++)
+            {
+                isRoomAvailable = true ;
+
+                // Checks the availability on the particular date
+                if (database.hotelReservations[room][startDay] == 0)
                 {
-                    if(Database.roomsDays [room] [s] != 0)
+                    // Checks for the availability for the complete duration
+                    for (int day = startDay; day <= endDay; day++)
                     {
-                        isRoomAvailable = false;
-                        break;
+                        if(database.hotelReservations[room] [day] != 0)
+                        {
+                            isRoomAvailable = false;
+                            break;
+                        }
                     }
                 }
-            }
-            else
-                isRoomAvailable = false;
+                else
+                    isRoomAvailable = false;
 
-            if (isRoomAvailable)
-            {
-                isRoomVacant = true;
-                for (int s = startDay; s <= endDay; s++)
+                // Change the status of the room to occupied for the requested duration
+                if (isRoomAvailable)
                 {
-                    Database.roomsDays [room][s] = 1;
+                    //isRoomVacant = true;
+                    for (int day = startDay; day <= endDay; day++)
+                    {
+                        database.hotelReservations[room][day] = 1;
+                    }
+                    //System.out.println("Accepted: Room "+ room + " is allotted ");
+                    //System.out.println(Arrays.deepToString(database.roomsDays));
+                    return "Accept";
                 }
-                System.out.println("Accepted: Room "+ room + " is allotted ");
-                break;
             }
+
+            // No room was available for the requested duration
+            //System.out.println("No room is available");
+            //System.out.println(Arrays.deepToString(database.roomsDays));
+            return "Decline";
         }
-
-        if (!isRoomVacant)
-            System.out.println("No room is available");
-
-        System.out.println("Current rooms status");
-        System.out.println(Arrays.deepToString(Database.roomsDays));
+        else
+        {
+            //System.out.println("Out of range");
+            //System.out.println(Arrays.deepToString(database.roomsDays));
+            return "Decline";
+        }
     }
 }

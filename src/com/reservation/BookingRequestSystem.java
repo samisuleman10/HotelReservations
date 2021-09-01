@@ -1,35 +1,31 @@
 package com.reservation;
-
 import java.util.Scanner;
 
+// Manages the input from the user
 public class BookingRequestSystem
 {
-    private int startDay;
-    private int endDay;
-    private BookingMonitoringSystem bookingMonitoringSystem;
+    private final Database database;
+    private final BookingMonitoringSystem bookingMonitoringSystem;
 
-    BookingRequestSystem()
+    BookingRequestSystem(int rooms ,int days)
     {
         bookingMonitoringSystem = new BookingMonitoringSystem();
+        database = new Database(rooms,days);
     }
 
     public void BookingRequest()
     {
+        int startDay, endDay;
+
         Scanner scanner = new Scanner(System.in);
         // Get input from customer
         System.out.println("Please enter the booking date: (Start day, End day)");
         System.out.print("Please enter the Start day: ");
-        this.startDay = scanner.nextInt();
+        startDay = scanner.nextInt();
         System.out.print("Please enter the End day: ");
-        this.endDay = scanner.nextInt();
-
-        if ((startDay > 0 && startDay < Database.days) && (endDay > 0 && endDay < Database.days) && startDay <= endDay)
-        {
-            bookingMonitoringSystem.AvailableRooms(startDay,endDay);
-        }
-        else
-            System.out.println("Declined");
-
+        endDay = scanner.nextInt();
+        String result = bookingMonitoringSystem.AvailableRooms(startDay, endDay, database);
+        System.out.println(result);
     }
 
 }

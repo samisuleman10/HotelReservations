@@ -1,12 +1,14 @@
 package com.reservation;
 
+// Stores the information for room reservations
 public  class Database
 {
+    public int [][] hotelReservations;
 
-    // Size of hotel max 1000
-    final static int rooms = 3;
-    //Total number of days
-    final static int days = 10;
+    Database(int roomQuantity, int totalDays)
+    {
+        hotelReservations = new int [roomQuantity] [totalDays];
+    }
 
-    static int [][] roomsDays = new int [rooms] [days];
+
 }
