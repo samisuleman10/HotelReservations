@@ -1,6 +1,6 @@
 package com.reservation;
 
-//Checks for the valid room requests
+//Checks for the valid request
 public class BookingMonitoringSystem
 {
     // Accepts or decline the availability of rooms in the hotel
