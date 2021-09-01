@@ -8,10 +8,8 @@ public class BookingMonitoringSystem
     
     public void AvailableRooms(int startDay, int endDay)
     {
-        //Database db = new Database();
-
         // first see if room 0 is availble on start day;
-        boolean isRoomAvailble = true ;
+        boolean isRoomAvailble;
         boolean isRoomVacant = false;
 
         System.out.println(Arrays.deepToString(Database.roomsDays));
