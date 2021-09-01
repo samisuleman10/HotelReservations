@@ -80,6 +80,4 @@ class BookingMonitoringSystemTest
         assertEquals("Accept", bookingMonitoringSystem.AvailableRooms(8,9,database));
     }
 
-
-
 }
